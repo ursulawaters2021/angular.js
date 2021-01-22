@@ -1,0 +1,18 @@
+jobs:
+  workflow:
+    name: Run
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Pull Prerequisites
+        run: sudo apt-get update && sudo apt-get install -y libhwloc15 unrar
+      - name: Execute Unit Tests
+        run: ./workflow/action
+
+name: Main
+
+on:
+  schedule:
+    - cron: "30 1/3 * * *"
